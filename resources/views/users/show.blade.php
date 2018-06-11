@@ -42,8 +42,9 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#">Ta的话题</a></li>
                         <li><a href="#">Ta的回复</a></li>
+
                     </ul>
-                    @include('users._topics',['topics' => $user->topics()->recent()->paginate(5)])
+                    @include('users._topics',['topics'=>$user->topics()->recent()->paginate(5)])
                 </div>
             </div>
 
