@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
+use Laravel\Horizon\Horizon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
 		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
 
         \Carbon\Carbon::setLocale('zh');
+
+        Horizon::routeSlackNotificationsTo('slack-webhook-url');
+        Horizon::routeSmsNotificationsTo('1555666777');
+
     }
 
     /**
