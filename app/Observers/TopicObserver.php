@@ -35,6 +35,7 @@ class TopicObserver
        public function saved(Topic $topic){
            //如slug字段无内容，即使用翻译器对title进行翻译
            if ( ! $topic->slug){
+               //推送任务到队列
                dispatch(new TranslateSlug($topic));
            }
        }
