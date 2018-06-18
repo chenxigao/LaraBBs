@@ -28,6 +28,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+       \Horizon::auth(function($Request){
+           //是否是站长
+           return \Auth::user()->hasRole('Founder');
+       });
+
     }
 }

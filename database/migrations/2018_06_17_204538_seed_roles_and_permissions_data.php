@@ -18,7 +18,7 @@ class SeedRolesAndPermissionsData extends Migration
      */
     public function up()
     {
-      //清除缓存
+        //清除缓存
         app()['cache']->forget('spatie.permission.cache');
 
         //创建权限
@@ -26,15 +26,16 @@ class SeedRolesAndPermissionsData extends Migration
         Permission::create(['name'=>'manage_users']);
         Permission::create(['name'=>'edit_settings']);
 
-        //创建站长角色，并授予权限
+        //创建站长角色并赋予权限
         $founder=Role::create(['name'=>'Founder']);
         $founder->givePermissionTo('manage_contents');
         $founder->givePermissionTo('manage_users');
-        $founder->givePermissionTo('edit_settings');
+        $founder->givePermissionTo('edit_setttings');
 
-        //创建管理员角色，并授予权限
+        //创建管理员角色并赋予权限
         $maintainer=Role::create(['name'=>'Maintainer']);
         $maintainer->givePermissionTo('manage_contents');
+
 
     }
 
@@ -45,21 +46,21 @@ class SeedRolesAndPermissionsData extends Migration
      */
     public function down()
     {
-      //清除缓存
+       //清除缓存
         app()['cache']->forget('spatie.permission.cache');
 
-        //情空所有数据表数据
+        //清空数据表数据
         $tableNames=config('permission.table_names');
 
-        Model::unguard();
-
-        DB::table($tableNames['role_has_permissions'])->delete();
-        DB::table($tableNames['model_has_roles'])->delete();
-        DB::table($tableNames['model_has_permissions'])->delete();
-        DB::table($tableNames['roles'])->delete();
-        DB::table($tableNames['permissions'])->delete();
-
         Model::reguard();
+
+        \DB::table($tableNames('role_has_permissions'))->delete();
+        \DB::table($tableNames('model_has_roles'))->delete();
+        \DB::table($tableNames('model_has_permissions'))->delete();
+        \DB::table($tableNames('roles'))->delete();
+        \DB::table($tableNames('permissions'))->delete();
+
+        Model::unguard();
 
 
     }
