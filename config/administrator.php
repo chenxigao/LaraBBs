@@ -68,6 +68,14 @@ return array(
             'roles',
             'permissions',
         ],
+        '内容管理'=>[
+            'categories',
+            'topics',
+            'replies',
+        ],
+        '站点管理' => [
+            'settings.site',
+        ]
     ],
 
     /*
@@ -96,7 +104,7 @@ return array(
     /*
      * 用来作为后台主页的菜单条目，由'use_dashboard'选项决定，菜单指的是‘menu'选项
      */
-    'home_page' => 'users',
+    'home_page' => 'topics',
 
     /*
      * 右上角返回主站按钮连接
@@ -106,7 +114,7 @@ return array(
     /*
      * 当选项‘permission’权限检测不通过时，将重定向用户到此处设置路径
      */
-    'login_path' => 'login',
+    'login_path' => 'permission-denied',
 
     /*
      *
