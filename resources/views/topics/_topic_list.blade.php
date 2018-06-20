@@ -5,6 +5,7 @@
                 <div class="media-left">
                     <a href="{{ route('users.show', [$topic->user_id]) }}">
                         <img class="media-object img-thumbnail" style="width: 52px; height: 52px;" src="{{ $topic->user->avatar }}" title="{{ $topic->user->name }}">
+
                     </a>
                 </div>
 

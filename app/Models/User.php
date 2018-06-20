@@ -65,5 +65,24 @@ class User extends Authenticatable
         $this->unreadNotifications->markAsRead();
     }
 
+    public function setPasswordAttribute($value){
+        //长度为60时，默认已加密
+        if(strlen($value) != 60){
+            //不等于60，做加密处理
+             $value=bcrypt($value);
+        }
+
+        $this->attributes['password']=$value;
+    }
+
+    public function setAvatarAttribute($path){
+        //如果不是http子串开头，那就是从后台上传的，需要补全url
+        if (! starts_with($path,'http')){
+            //拼接完整的url
+            $path=config('app.url') . "/uploads/images/avatars/$path";
+        }
+
+        $this->attributes['avatar']=$path;
+    }
 
 }
