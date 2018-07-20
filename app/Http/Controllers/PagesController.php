@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
+use App\Models\User;
+use App\Notifications\TopicReplied;
+use App\Notifications\UsersRegistered;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
     public function root(){
-
+//        $user = User::find(1);
+//        $user->notify(new TopicReplied(Reply::find(1)));
+//
+//        $user->registerNotify(new UsersRegistered($user));
         return view('pages.root');
     }
 

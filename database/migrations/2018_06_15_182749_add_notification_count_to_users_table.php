@@ -15,6 +15,9 @@ class AddNotificationCountToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('notification_count')->unsigned()->default(0);
+            $table->integer('is_admin')->default(0);
+            $table->string('activation_token')->nullable();
+            $table->boolean('activated')->default(false);
         });
     }
 
@@ -27,6 +30,9 @@ class AddNotificationCountToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('notification_count');
+            $table->dropColumn('is_admin');
+            $table->dropColumn('activation_token');
+            $table->dropColumn('activated');
         });
     }
 }

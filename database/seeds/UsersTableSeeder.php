@@ -47,13 +47,17 @@ class UsersTableSeeder extends Seeder
         $user=User::find(1);
         $user->name='Summer';
         $user->email='summer@sails.com';
+        $user->is_admin='1';
+        $user->activated=true;
         $user->avatar='https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/ZqM7iaP4CR.png?imageView2/1/w/200/h/200';
         $user->assignRole('Founder'); //初始化角色，将一号用户设置为站长
         $user->save();
 
         //将2号用户指派为管理员权限
        $user=User::find(2);
+       $user->is_admin='2';
        $user->assignRole('Maintainer');
+       $user->save();
 
      }
 }

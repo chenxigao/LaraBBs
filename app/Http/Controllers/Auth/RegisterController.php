@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistered;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -71,5 +74,28 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    // 这个就是视频的 create方法
+    public function register(Request $request)
+    {
+//        dd($request->all());
+        $this->validator($request->all())->validate();
+
+        event(new UserRegistered($user = $this->create($request->all())));
+
+
+        session()->flash('warning', '激活邮件已发送，请到邮箱中的注册邮件进行激活。');
+        return redirect('/');
+
+//        return $this->registered($request, $user)
+//            ?: redirect($this->redirectPath());
     }
 }

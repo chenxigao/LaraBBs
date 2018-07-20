@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Handlers\ImageUploadHandler;
+use Auth;
 
 
 class UsersController extends Controller
@@ -20,7 +21,6 @@ class UsersController extends Controller
 
 
     public function show(User $user){
-
         return view('users.show',compact('user'));
     }
 
@@ -46,5 +46,19 @@ class UsersController extends Controller
         return redirect()->route('users.show',$user->id)->with('success','个人资料更新成功!');
     }
 
+    public function confirmEmail($token)
+    {
+        $user=User::where('activation_token',$token)->firstOrFail();
+
+        $user->activated=true;
+        $user->activation_token=null;
+        $user->save();
+
+        Auth::login($user);
+        session()->flash('success','恭喜你激活成功！');
+        return redirect()->route('users.show',[$user]);
+        
+    }
+    
 
 }

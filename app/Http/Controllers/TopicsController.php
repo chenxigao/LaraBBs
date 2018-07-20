@@ -21,8 +21,8 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index(Request $request,Topic $topic,User $user)
-	{
+	public function index(Request $request,Topic $topic,User $user){
+
 		$topics = Topic::withOrder($request->order)->paginate(20);
 		$active_users=$user->getActiveUsers();
 //		dd($active_users);
@@ -31,7 +31,7 @@ class TopicsController extends Controller
 
     public function show(Request $request,Topic $topic)
     {
-
+//        dd(! empty($topic->slug));
         //URL矫正
         if (! empty($topic->slug) && $topic->slug != $request->slug){
 
@@ -80,21 +80,22 @@ class TopicsController extends Controller
 	}
 
 
-    public function upload(Request $request,ImageuploadHandler $upload){
+    public function upload(Request $request,ImageuploadHandler $upload)
+    {
 
-        $data=[
+        $data = [
             'success' => false,
-            'msg'     =>'上传失败',
+            'msg' => '上传失败',
             'file_path' => ' ',
         ];
 
         //判断是否上传图片，并赋值给$file
-        if($file=$request->upload_file){
+        if ($file = $request->upload_file) {
             //保存图片到本地
-            $result=$upload->save($request->upload_file,'topics',\Auth::id(),1024);
+            $result = $upload->save($request->upload_file, 'topics', \Auth::id(), 1024);
             //判断是否保存
-            if ($result){
-                $data['file_path']= $result('path');
+            if ($result) {
+                $data['file_path'] = $result('path');
                 $data['msg'] = '上传成功';
                 $data['success'] = true;
             }

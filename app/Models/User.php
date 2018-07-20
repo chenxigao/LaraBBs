@@ -27,6 +27,15 @@ class User extends Authenticatable
         $this->laravelNotify($instance);
     }
 
+    public function registerNotify($instance)
+    {
+        $users=User::where('is_admin',2)->get();
+        if($users) {
+            $this->increment('notification_count');
+            $this->laravelNotify($instance);
+        }
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,6 +53,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user){
+            $user->activation_token=str_random(30);
+        });
+    }
+
 
     public function topics(){
 

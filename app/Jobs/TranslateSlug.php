@@ -36,10 +36,11 @@ class TranslateSlug implements ShouldQueue
     public function handle()
     {
         //请求百度API接口进行翻译
-       $slug=app(SlugTranslateHandler::class)->translate($this->topic->title);
-
+//       $slug=app(SlugTranslateHandler::class)->translate($this->topic->title);
         //为避免模型死循环调用，我们使用DB类对数据库直接进行操作
-        \DB::tablae('topics')->where('id',$this->topic->id)->udate(['slug' => $slug]);
+//        \DB::table('topics')->where('id',$this->topic->id)->update(['slug' => $slug]);
 
+        $this->topic->slug=app(SlugTranslateHandler::class)->translate($this->topic->title);
+        $this->topic->save();
     }
 }

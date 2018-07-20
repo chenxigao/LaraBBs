@@ -34,11 +34,15 @@ class TopicObserver
 
     public function saved(Topic $topic)
     {
+
+//        dispatch(new TranslateSlug($topic));
         //如slug字段无内容，即使用翻译器对title进行翻译
-        if (!$topic->slug) {
-            //推送任务到队列
+        if (empty($topic->slug)) {
             dispatch(new TranslateSlug($topic));
+            //推送任务到队列
         }
+
+
     }
 
     public function deleted(Topic $topic)

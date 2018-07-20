@@ -28,7 +28,7 @@ trait ActiveUserHelper{
         //尝试从缓存中取出$cache_key相关数据，如能取到，便直接返回数据
         //取不到则运行匿名函数代码来取出活跃用户数据，返回的同时做了缓存
         return Cache::remember($this->cache_key,$this->cache_expire_in_minites,function (){
-            return calculateActiveUsers();
+            return $this->calculateActiveUsers();
         });
 
     }

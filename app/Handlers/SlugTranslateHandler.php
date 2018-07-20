@@ -17,9 +17,10 @@ class SlugTranslateHandler {
         $appid = config('services.baidu_translate.appid');
         $key = config('services.baidu_translate.key');
         $salt = time();
-        $str = '2017-08-11 08:12:11';
+//        $str = '2017-08-11 08:12:11';
+
         //
-        $str2 = 1528906015;
+//        $str2 = 1528906015;
 
         //如果没有配置百度翻译，自动使用兼容的拼音方法
         if (empty($appid) || empty($key)) {

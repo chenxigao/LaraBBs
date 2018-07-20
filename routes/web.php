@@ -36,6 +36,7 @@ Route::post('password/reset','Auth\ResetPasswordController@reset');
 Route::resource('users','UsersController',['only'=>['show','update','edit']]);
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::get('topics/{topic}/{slug?}','TopicsController@show')->name('topics.show');
+Route::get('register/confirm/{token}','UsersController@confirmEmail')->name('confirm_email');
 
 Route::resource('categories','CategoriesController',['only'=>['show']]);
 
