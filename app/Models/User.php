@@ -6,10 +6,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
 use Spatie\Permission\Traits\HasRoles;
+//use Carbon\Carbon;
 
 class User extends Authenticatable
 {
+//    protected $dates=['last_actived_at'];
     use Traits\ActiveUserHelper;
+    use Traits\LastActivedAtHelper;
 
     use HasRoles;
 
@@ -30,9 +33,9 @@ class User extends Authenticatable
     public function registerNotify($instance)
     {
         $users=User::where('is_admin',2)->get();
-        if($users) {
-            $this->increment('notification_count');
-            $this->laravelNotify($instance);
+        foreach($users as $data) {
+            $data->increment('notification_count');
+            $data->laravelNotify($instance);
         }
     }
 

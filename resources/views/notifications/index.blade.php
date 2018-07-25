@@ -13,7 +13,7 @@
                      @foreach($notifications as $notification)
                               @include('notifications.types._' . snake_case(class_basename($notification->type)))
                          @can('is_admin',$notification)
-                              @include('notifications.types._' . snake_case(class_basename($notification->type)))
+                              {{--@include('notifications.types._' . snake_case(class_basename($notification->type)))--}}
                          @endcan
                          @endforeach
                          {!! $notifications->render() !!}

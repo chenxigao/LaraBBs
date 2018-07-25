@@ -15,6 +15,7 @@ class PagesController extends Controller
 //        $user->notify(new TopicReplied(Reply::find(1)));
 //
 //        $user->registerNotify(new UsersRegistered($user));
+
         return view('pages.root');
     }
 

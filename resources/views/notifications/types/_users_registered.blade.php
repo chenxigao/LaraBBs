@@ -1,8 +1,8 @@
 <div class="media">
      <div class="avatar pull-left">
          <a href="{{ route('users.show',$notification->data['id']) }}">
-             {{--<img class="media-pbject img-thumbnail" alt="{{ $notification->data['name'] }}"--}}
-             {{--src="{{ $notification->data['avatar'] }}" style="width: 48px; height: 48px;">--}}
+             <img class="media-pbject img-thumbnail" alt="{{ $notification->data['name'] }}"
+             src="{{ $notification->data['avatar'] }}" style="width: 48px; height: 48px;">
          </a>
      </div>
 
@@ -18,3 +18,4 @@
        </div>
     </div>
 </div>
+<hr>
